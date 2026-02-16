@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import type { Pergunta, Resposta } from "../types/models"
+import type { Pergunta, Resposta } from "../types/models";
 
 interface DataContextType {
     perguntas: Pergunta[];

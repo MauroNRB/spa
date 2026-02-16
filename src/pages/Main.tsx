@@ -5,13 +5,19 @@ import { useMemo, useState } from "react";
 export default function Main() {
     const { perguntas, respostas } = useData();
 
-    const perguntasAtivas = useMemo(() => [...perguntas].filter((p) => p.ativo).sort((a, b) => a.ordem - b.ordem), [perguntas]);
+    const perguntasAtivas = useMemo(() => {
+        return perguntas.filter((p) => p.ativo === true && p.respostasIds?.length > 0).sort((a, b) => a.ordem - b.ordem);
+    }, [perguntas]);
 
     const respostasMap = useMemo(() => {
         const map: Record<string, string> = {};
-        respostas.forEach((r) => {
-            map[r.id] = r.nome;
-        });
+
+        respostas
+            .filter((r) => r.ativo === true)
+            .forEach((r) => {
+                map[r.id] = r.nome;
+            });
+
         return map;
     }, [respostas]);
 
